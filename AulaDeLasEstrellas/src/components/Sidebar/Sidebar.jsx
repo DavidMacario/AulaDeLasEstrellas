@@ -3,8 +3,9 @@ import {
   ArrowRightEndOnRectangleIcon,
   ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../assets/LogoSidebar.png";
+import logo from "../../assets/LogoSidebar.png";
 import { useState } from "react";
+import "./sidebar.css"; // ✅ Importar CSS personalizado
 
 const navItems = [
   { name: "Aula", path: "/aula" },
@@ -20,19 +21,19 @@ export default function Sidebar() {
   return (
     <aside
       className={`relative flex flex-col h-screen font-fredoka shadow-md border-r-4 border-textGreen bg-backgroundGreen text-textGreen transition-all duration-300 ${
-        isCollapsed ? "w-0" : "w-64"
+        isCollapsed ? "w-0" : "w-64 sidebar-ipad sidebar-mobile"
       }`}
     >
       {/* Botón SIEMPRE visible */}
       <button
         onClick={toggleSidebar}
-        className="absolute bottom-12 -right-16 z-50 bg-pastelGreen hover:bg-hoverDarkGreen text-textGreen rounded-full p-2 shadow-lg transition-transform duration-200"
+        className="absolute bottom-12 -right-16 z-50 bg-pastelGreen hover:bg-hoverDarkGreen text-textGreen rounded-full p-2 shadow-lg transition-transform duration-200 toggle-button-ipad toggle-button-mobile"
         title={isCollapsed ? "Mostrar menú" : "Ocultar menú"}
       >
         {isCollapsed ? (
-          <ArrowRightStartOnRectangleIcon className="h-8 w-8" />
+          <ArrowRightStartOnRectangleIcon className="h-8 w-8 icon-ipad icon-mobile" />
         ) : (
-          <ArrowRightEndOnRectangleIcon className="h-8 w-8 -scale-x-100" />
+          <ArrowRightEndOnRectangleIcon className="h-8 w-8 -scale-x-100 icon-ipad icon-mobile" />
         )}
       </button>
 
@@ -60,14 +61,14 @@ export default function Sidebar() {
             key={item.name}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center px- py-8 text-3xl transition-colors duration-200 ${
+              `flex items-center py-8 text-3xl navlink-ipad navlink-mobile transition-colors duration-200 ${
                 isActive ? "bg-pastelGreen font-semibold" : "hover:bg-hoverDarkGreen"
               }`
             }
           >
-            <span className="w-6" /> {/* Espaciado por íconos futuros si quisieras */}
+            <span className="w-6" />
             <span
-              className={`transition-opacity duration-300 ease-in-out ${
+              className={`pl-4 transition-opacity duration-300 ease-in-out ${
                 isCollapsed ? "opacity-0 pointer-events-none" : "opacity-100"
               }`}
               style={{ transitionDelay: `${index * 80}ms` }}
